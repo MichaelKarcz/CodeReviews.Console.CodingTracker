@@ -4,7 +4,7 @@
     {
         public static void Main(string[] args)
         {
-            SQLHelper.CreateDatabaseIfNotExists();
+            SqlHelper.CreateDatabaseIfNotExists();
 
             bool runProgram = true;
             while (runProgram)
@@ -43,7 +43,6 @@
 
             Console.WriteLine("\n\nGoodbye!");
             Console.ReadKey();
-
         }
     }
 }

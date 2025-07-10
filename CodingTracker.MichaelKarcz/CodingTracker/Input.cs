@@ -30,7 +30,7 @@ namespace CodingTracker
 
         public static void DisplayAllRecords()
         {
-            List<CodingSession> allSessions = SQLHelper.GetAllSessions();
+            List<CodingSession> allSessions = SqlHelper.GetAllSessions();
 
             Console.WriteLine("\n~Coding Sessions~");
             Table table = new Table();
@@ -69,12 +69,12 @@ namespace CodingTracker
                 Console.WriteLine("\nA new coding session has been added!\n");
             }
 
-                SQLHelper.InsertSingleSession(session); // the constructor instantiates the object with DateTime.Now for the StartTime field
+                SqlHelper.InsertSingleSession(session); // the constructor instantiates the object with DateTime.Now for the StartTime field
         }
 
         public static void FinishOngoingSession()
         {
-            List<CodingSession> unfinishedSessions = SQLHelper.GetUnfinishedSessions();
+            List<CodingSession> unfinishedSessions = SqlHelper.GetUnfinishedSessions();
             if (unfinishedSessions.Count > 0)
             {
                 CodingSession unfinishedSession = SelectASessionById(unfinishedSessions);
@@ -97,7 +97,7 @@ namespace CodingTracker
 
                 unfinishedSession.CalculateDuration();
 
-                if (SQLHelper.UpdateSession(unfinishedSession.Id, unfinishedSession))
+                if (SqlHelper.UpdateSession(unfinishedSession.Id, unfinishedSession))
                 {
                     Console.WriteLine("\nThe coding session has been completed!\n");
                 }
@@ -113,12 +113,12 @@ namespace CodingTracker
             session.EndTime = GetEndTime(session.StartTime);
             session.CalculateDuration();
 
-            SQLHelper.InsertSingleSession(session);
+            SqlHelper.InsertSingleSession(session);
         }
 
         public static void UpdateSession()
         {
-            List<CodingSession> allSessions = SQLHelper.GetAllSessions();
+            List<CodingSession> allSessions = SqlHelper.GetAllSessions();
             if (allSessions.Count > 0)
             {
                 CodingSession sessionToUpdate = SelectASessionById(allSessions);
@@ -150,7 +150,7 @@ namespace CodingTracker
 
                     sessionToUpdate.CalculateDuration();
 
-                    if (SQLHelper.UpdateSession(sessionToUpdate.Id, sessionToUpdate))
+                    if (SqlHelper.UpdateSession(sessionToUpdate.Id, sessionToUpdate))
                     {
                         Console.WriteLine("\nThe session was updated successfully!\n");
                     }
@@ -166,7 +166,7 @@ namespace CodingTracker
 
         public static void DeleteSession()
         {
-            List<CodingSession> allSessions = SQLHelper.GetAllSessions();
+            List<CodingSession> allSessions = SqlHelper.GetAllSessions();
             if (allSessions.Count > 0)
             {
                 CodingSession sessionToDelete = SelectASessionById(allSessions);
@@ -185,7 +185,7 @@ namespace CodingTracker
                 }
                 else
                 {
-                    bool sessionDeleted = SQLHelper.DeleteSession(sessionToDelete.Id);
+                    bool sessionDeleted = SqlHelper.DeleteSession(sessionToDelete.Id);
                     if (sessionDeleted)
                     {
                         Console.WriteLine("The session has been deleted successfully.");

@@ -4,7 +4,7 @@ using Microsoft.Data.Sqlite;
 
 namespace CodingTracker
 {
-    internal static class SQLHelper
+    internal static class SqlHelper
     {
         private static readonly string CONNECTION_STRING = ConfigurationManager.AppSettings.Get("connectionString");
         private static readonly string TABLENAME = "codingSessions";
@@ -57,7 +57,7 @@ namespace CodingTracker
 
             object[] parameters = { new {StartTime=habit.StartTime, EndTime=habit.EndTime, Duration=habit.Duration }};
 
-            return PerformCUDOperation(commandText, parameters);
+            return PerformCudOperation(commandText, parameters);
 
         }
 
@@ -68,7 +68,7 @@ namespace CodingTracker
 
             object[] parameters = { new { Id = id } };
 
-            return PerformCUDOperation(commandText, parameters);
+            return PerformCudOperation(commandText, parameters);
         }
 
         public static bool UpdateSession(int id, CodingSession habit)
@@ -79,7 +79,7 @@ namespace CodingTracker
 
             object[] parameters = { new { Id = id, StartTime = habit.StartTime, EndTime = habit.EndTime, Duration = habit.Duration } };
 
-            return PerformCUDOperation(commandText, parameters);
+            return PerformCudOperation(commandText, parameters);
         }
 
         private static List<CodingSession> PerformReadOperation(string commandText)
@@ -100,7 +100,7 @@ namespace CodingTracker
             return retrievedSessions;
         }
 
-        private static bool PerformCUDOperation(string commandText, object[] parameters)
+        private static bool PerformCudOperation(string commandText, object[] parameters)
         {
             bool commandSuccessful = false;
 
